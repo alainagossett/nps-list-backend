@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const morgan = require('morgan');
+const favoritesRouter = require('./controllers/favorites');
 //get .env variables
 require('dotenv').config();
 //pull PORT from .env, default value of 3000
@@ -22,9 +23,7 @@ mongoose.connection
 
 //ROUTES
 //test route
-app.get('/', (req, res) => {
-    res.send("Hello Parks People!")
-});
+app.use('/', favoritesRouter);
 
 
 
