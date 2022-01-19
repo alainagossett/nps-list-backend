@@ -12,6 +12,13 @@ const { PORT = 3000 } = process.env;
 const app = express();
 
 
+//Connect and Configure MongoDB
+mongoose.connect(process.env.DATABASE_URL)
+
+mongoose.connection
+    .on('open', () => console.log('Connected to MongoDB'))
+    .on('close', () => console.log('Disconnected from MongoDB'))
+    .on('error', (error) => console.log('An error occurred: ' + error))
 
 //ROUTES
 //test route
