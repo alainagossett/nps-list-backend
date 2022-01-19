@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 //Define Schema
 const favoriteSchema = new Schema({
     userId: { type: String, required: true },
-    parkId: String
+    parkCode: String
 }, { timestamps: true });
 
 //Compile mongoose Schema into a model

@@ -21,6 +21,11 @@ mongoose.connection
     .on('close', () => console.log('Disconnected from MongoDB'))
     .on('error', (error) => console.log('An error occurred: ' + error))
 
+//Mount Middleware
+app.use(cors());
+app.use(morgan('dev'));
+app.use(express.json());
+
 //ROUTES
 //test route
 app.use('/', favoritesRouter);
