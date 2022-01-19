@@ -9,6 +9,14 @@ favoritesRouter.get('/', (req, res) => {
     res.send("Hello Parks People!");
 });
 
+//INDEX ROUTE
+favoritesRouter.get('/favorites', async (req, res) => {
+    try {
+        res.json(await Favorite.find({}))
+    } catch (error) {
+        res.status(400).json(error)
+    }
+});
 
 
 
