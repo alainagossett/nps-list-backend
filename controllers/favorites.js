@@ -18,6 +18,15 @@ favoritesRouter.get('/favorites', async (req, res) => {
     }
 });
 
+//CREATE ROUTE
+favoritesRouter.post('/favorites', async (req, res) => {
+    try {
+        res.json(await Favorite.create(req.body))
+    } catch (error) {
+        res.status(400).json(error)
+    }
+});
+
 
 
 
