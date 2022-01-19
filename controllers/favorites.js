@@ -36,7 +36,14 @@ favoritesRouter.delete('/favorites/:id', async (req, res) => {
     }
 });
 
-
+//UPDATE ROUTE
+favoritesRouter.put('/favorites/:id', async (req, res) => {
+    try {
+        res.json(await Favorite.findByIdAndUpdate(req.params.id, req.body, { new: true }))
+    } catch (error) {
+        res.status(400).json(error)
+    }
+});
 
 
 
