@@ -1,8 +1,14 @@
 //Require Dependencies
 const express = require('express');
 const favoritesRouter = express.Router();
+const axios = require('axios');
 
 const Favorite = require('../models/favorite');
+
+require('dotenv').config();
+
+const API_KEY = process.env.API_KEY;
+const BASE_URL = `https://developer.nps.gov/api/v1/parks?`
 
 //Define Routes
 favoritesRouter.get('/', (req, res) => {
@@ -45,7 +51,13 @@ favoritesRouter.put('/favorites/:id', async (req, res) => {
     }
 });
 
-
+//Search Route
+favoritesRouter.get('/parks/search', async(req,res) => {
+    const URL = `${BASE_URL}stateCode=CO&api_key=${API_KEY}`
+    const results = await axios.get(URL);
+    res.json(results.data);
+    console.log(URL)
+})
 
 
 //Export the module

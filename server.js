@@ -3,7 +3,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const morgan = require('morgan');
+const axios = require('axios');
 const favoritesRouter = require('./controllers/favorites');
+
 //get .env variables
 require('dotenv').config();
 //pull PORT from .env, default value of 3000
@@ -11,7 +13,6 @@ const { PORT = 3000 } = process.env;
 
 //Initialize the App
 const app = express();
-
 
 //Connect and Configure MongoDB
 mongoose.connect(process.env.DATABASE_URL)
