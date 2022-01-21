@@ -9,7 +9,7 @@ const favoritesRouter = require('./controllers/favorites');
 //get .env variables
 require('dotenv').config();
 //pull PORT from .env, default value of 3000
-const { PORT = 3000 } = process.env;
+const { PORT = 3001 } = process.env;
 
 //Initialize the App
 const app = express();
