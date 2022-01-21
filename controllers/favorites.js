@@ -53,7 +53,7 @@ favoritesRouter.put('/favorites/:id', async (req, res) => {
 
 //Search Route
 favoritesRouter.get('/parks/search', async(req,res) => {
-    const URL = `${BASE_URL}stateCode=CO&api_key=${API_KEY}`
+    const URL = `${BASE_URL}stateCode=${req.query.stateCode}&api_key=${API_KEY}`
     const results = await axios.get(URL);
     res.json(results.data);
     console.log(URL)
