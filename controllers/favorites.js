@@ -60,7 +60,7 @@ favoritesRouter.get('/parks/search', async(req,res) => {
     const parkCodes = [];
     const parkData = results.data.data;
     parkData.forEach(park => {
-        parkCodes.push(park.parkCode)
+        parkCodes.push(park.fullName + " (" + park.parkCode + ")");
     })
     console.log(parkCodes);
     // res.json(results.data);
