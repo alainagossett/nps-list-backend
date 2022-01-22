@@ -8,7 +8,7 @@ const Favorite = require('../models/favorite');
 require('dotenv').config();
 
 const API_KEY = process.env.API_KEY;
-const BASE_URL = `https://developer.nps.gov/api/v1/parks?`
+const BASE_URL = `https://developer.nps.gov/api/v1/`
 
 //Define Routes
 favoritesRouter.get('/', (req, res) => {
@@ -51,21 +51,35 @@ favoritesRouter.put('/favorites/:id', async (req, res) => {
     }
 });
 
-//Search Route
+//Search Parks Route
 favoritesRouter.get('/parks/search', async(req,res) => {
     console.log(req.query)
-    const URL = `${BASE_URL}stateCode=${req.query.stateCode}&api_key=${API_KEY}`
+    const URL = `${BASE_URL}parks?stateCode=${req.query.stateCode}&api_key=${API_KEY}`
     const results = await axios.get(URL);
 
     const parkCodes = [];
     const parkData = results.data.data;
     parkData.forEach(park => {
-        parkCodes.push(park.fullName + " (" + park.parkCode + ")");
+        parkCodes.push({
+           name: park.fullName,
+            code: park.parkCode
+        })
     })
-    console.log(parkCodes);
+    // console.log(parkCodes);
     // res.json(results.data);
     res.json(parkCodes);
     console.log(URL)
+})
+
+//GET Park Details Route
+favoritesRouter.get('/parks/:code', async(req,res) => {
+    console.log(req.params.code)
+    const URL = `${BASE_URL}places?parkCode=${req.params.code}&api_key=${API_KEY}`
+    const parkDetails = await axios.get(URL);
+
+    console.log(parkDetails)
+
+    res.json(parkDetails.data)
 })
 
 
