@@ -8,7 +8,7 @@ const parksRouter = require('./controllers/parks');
 
 //get .env variables
 require('dotenv').config();
-//pull PORT from .env, default value of 3000
+//pull PORT from .env, default value of 3001
 const { PORT = 3001 } = process.env;
 
 //Initialize the App
