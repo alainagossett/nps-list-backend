@@ -2,6 +2,7 @@
 const express = require('express');
 const favoritesRouter = express.Router();
 const axios = require('axios');
+const cors = require('cors');
 
 const Favorite = require('../models/favorite');
 
@@ -45,39 +46,41 @@ favoritesRouter.delete('/favorites/:id', async (req, res) => {
 //UPDATE ROUTE
 favoritesRouter.put('/favorites/:id', async (req, res) => {
     try {
-        res.json(await Favorite.findByIdAndUpdate(req.params.id, req.body, { new: true }))
+        res.json(await Favorite.findByIdAndUpdate(req.params.id, req.body, {
+            new: true
+        }))
     } catch (error) {
         res.status(400).json(error)
     }
 });
 
 //Search Parks Route
-favoritesRouter.get('/parks/search', async(req,res) => {
+favoritesRouter.get('/parks/search', async (req, res) => {
     console.log(req.query)
-    const URL = `${BASE_URL}parks?stateCode=${req.query.stateCode}&api_key=${API_KEY}`
-    const results = await axios.get(URL);
+    const url = `${BASE_URL}parks?stateCode=${req.query.stateCode}&api_key=${API_KEY}`
+    const results = await axios.get(url);
 
     const parkCodes = [];
     const parkData = results.data.data;
     parkData.forEach(park => {
         parkCodes.push({
-           name: park.fullName,
+            name: park.fullName,
             code: park.parkCode
         })
     })
     // console.log(parkCodes);
     // res.json(results.data);
     res.json(parkCodes);
-    console.log(URL)
+    console.log(url)
 })
 
 //GET Park Details Route
-favoritesRouter.get('/parks/:code', async(req,res) => {
-    console.log(req.params.code)
-    const URL = `${BASE_URL}places?parkCode=${req.params.code}&api_key=${API_KEY}`
-    const parkDetails = await axios.get(URL);
+favoritesRouter.get('/parks/:code', async (req, res) => {
+    console.log("Parks/:code", req.params.code)
+    const detailUrl = `${BASE_URL}places?parkCode=${req.params.code}&api_key=${API_KEY}`
+    const parkDetails = await axios.get(detailUrl);
 
-    console.log(parkDetails)
+    console.log(parkDetails.data)
 
     res.json(parkDetails.data)
 })
