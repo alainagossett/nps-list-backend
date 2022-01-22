@@ -3,8 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const morgan = require('morgan');
-const axios = require('axios');
 const favoritesRouter = require('./controllers/favorites');
+const parksRouter = require('./controllers/parks');
 
 //get .env variables
 require('dotenv').config();
@@ -28,9 +28,8 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 //ROUTES
-//test route
 app.use('/', favoritesRouter);
-
+app.use('/', parksRouter);
 
 
 //Tell the App to Listen
