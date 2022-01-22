@@ -8,7 +8,7 @@ const API_KEY = process.env.API_KEY;
 const BASE_URL = `https://developer.nps.gov/api/v1/`
 
 
-//Search Parks Route
+//Search Parks by State Code Route
 parksRouter.get('/parks/search', async (req, res) => {
     console.log(req.query)
     const url = `${BASE_URL}parks?stateCode=${req.query.stateCode}&api_key=${API_KEY}`;
@@ -22,16 +22,12 @@ parksRouter.get('/parks/search', async (req, res) => {
             code: park.parkCode
         })
     })
-    // console.log(parkCodes);
-    // res.json(results.data);
     res.json(parkCodes);
-    console.log(url)
 })
 
 //GET Park Details Route
 parksRouter.get('/parks/:code', async (req, res) => {
     const url = `${BASE_URL}parks?parkCode=${req.params.code}&api_key=${API_KEY}`;
-    console.log(url);
     const parkResults = await axios.get(url);
 
     console.log("Park Details: ", parkResults)
@@ -41,7 +37,6 @@ parksRouter.get('/parks/:code', async (req, res) => {
 
 //GET Place Details Route
 parksRouter.get('/places/:code', async (req, res) => {
-    console.log("places/:code", req.params.code)
     const detailUrl = `${BASE_URL}places?parkCode=${req.params.code}&api_key=${API_KEY}`
     const places = await axios.get(detailUrl);
 
