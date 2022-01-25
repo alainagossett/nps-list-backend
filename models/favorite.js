@@ -5,9 +5,11 @@ const Schema = mongoose.Schema;
 
 //Define Schema
 const favoriteSchema = new Schema({
-    userId: { type: String, required: true },
+    // userId: { type: String, required: true },
+    parkName: String,
+    parkDescr: String,
     parkCode: { type: String, required: true },
-    notes: String,
+    // notes: String,
 }, { timestamps: true });
 
 //Compile mongoose Schema into a model

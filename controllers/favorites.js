@@ -2,12 +2,10 @@
 const express = require('express');
 const favoritesRouter = express.Router();
 
-const Favorite = require('../models/favorite');
+const Favorite = require('../models/Favorite');
 
 require('dotenv').config();
 
-const API_KEY = process.env.API_KEY;
-const BASE_URL = `https://developer.nps.gov/api/v1/`
 
 //Define Routes
 favoritesRouter.get('/', (req, res) => {
