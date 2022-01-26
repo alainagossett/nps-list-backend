@@ -9,7 +9,7 @@ const favoriteSchema = new Schema({
     parkName: String,
     parkDescr: String,
     parkCode: { type: String, required: true },
-    // notes: String,
+    notes: String,
 }, { timestamps: true });
 
 //Compile mongoose Schema into a model
