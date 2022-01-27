@@ -13,6 +13,6 @@ const favoriteSchema = new Schema({
 }, { timestamps: true });
 
 //Compile mongoose Schema into a model
-const Favorite = mongoose.model("Favorite", favoriteSchema);
+const favorite = mongoose.model("Favorite", favoriteSchema);
 
-module.exports = Favorite;
+module.exports = favorite;
