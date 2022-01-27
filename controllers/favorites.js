@@ -2,7 +2,7 @@
 const express = require('express');
 const favoritesRouter = express.Router();
 
-const Favorite = require('../models/Favorite');
+const Favorite = require('../models/favorite');
 
 require('dotenv').config();
 
