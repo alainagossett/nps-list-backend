@@ -50,6 +50,15 @@ favoritesRouter.put('/favorites/:id', async (req, res) => {
     }
 });
 
+//SHOW ROUTE
+favoritesRouter.get('/favorites/:id', async (req, res) => {
+    try {
+        res.json(await Favorite.find(req.params.id))
+    } catch (error) {
+        res.status(400).json(error)
+    }
+});
+
 
 //Export the module
 module.exports = favoritesRouter;
