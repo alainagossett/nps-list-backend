@@ -4,6 +4,10 @@ const favoritesRouter = express.Router();
 
 const Favorite = require('../models/favorite');
 
+const admin = require('firebase-admin');
+
+const serviceAccount = require('../service-account-credentials.json');
+
 require('dotenv').config();
 
 
@@ -23,6 +27,10 @@ favoritesRouter.get('/favorites', async (req, res) => {
 
 //CREATE ROUTE
 favoritesRouter.post('/favorites', async (req, res) => {
+    const token = req.get('Authorization');
+    if(!token) return res.status(400).json({message: 'You must be logged in first'});
+    const user = await admin.auth().verifyIdToken(token.replace('Bearer ', ''));
+    console.log(user);
     try {
         res.json(await Favorite.create(req.body))
     } catch (error) {
