@@ -6,6 +6,16 @@ const morgan = require('morgan');
 const favoritesRouter = require('./controllers/favorites');
 const parksRouter = require('./controllers/parks');
 
+//Firebase configs
+const admin = require('firebase-admin');
+
+const serviceAccount = require('./service-account-credentials.json');
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+
+
 //get .env variables
 require('dotenv').config();
 //pull PORT from .env, default value of 3001
