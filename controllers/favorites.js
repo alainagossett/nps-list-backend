@@ -29,49 +29,55 @@ favoritesRouter.get('/', (req, res) => {
     res.send("Hello Parks People!");
 });
 
-//INDEX ROUTE
-favoritesRouter.get('/favorites', isAuthenticated, async (req, res) => {
+async function index (req, res) {
     try {
         res.json(await Favorite.find({uId: req.user.uid}))
     } catch (error) {
         res.status(400).json(error)
     }
-});
+}
+
+//INDEX ROUTE
+favoritesRouter.get('/favorites', isAuthenticated, index);
 
 //CREATE ROUTE
 favoritesRouter.post('/favorites', isAuthenticated, async (req, res) => {
     try {
         req.body.uId = req.user.uid;
-        res.json(await Favorite.create(req.body))
+        await Favorite.create(req.body)
+        index(req, res)
     } catch (error) {
         res.status(400).json(error)
     }
 });
 
 //DELETE ROUTE
-favoritesRouter.delete('/favorites/:id', async (req, res) => {
+favoritesRouter.delete('/favorites/:id', isAuthenticated, async (req, res) => {
     try {
-        res.json(await Favorite.findByIdAndDelete(req.params.id))
+        await Favorite.findByIdAndDelete(req.params.id)
+        index(req, res)
     } catch (error) {
         res.status(400).json(error)
     }
 });
 
 //UPDATE ROUTE
-favoritesRouter.put('/favorites/:id', async (req, res) => {
+favoritesRouter.put('/favorites/:id', isAuthenticated, async (req, res) => {
     try {
-        res.json(await Favorite.findByIdAndUpdate(req.params.id, req.body, {
+        await Favorite.findByIdAndUpdate(req.params.id, req.body, {
             new: true
-        }))
+        })
+        index(req, res)
     } catch (error) {
         res.status(400).json(error)
     }
 });
 
 //SHOW ROUTE
-favoritesRouter.get('/favorites/:id', async (req, res) => {
+favoritesRouter.get('/favorites/:id', isAuthenticated, async (req, res) => {
     try {
-        res.json(await Favorite.find(req.params.id))
+        await Favorite.find(req.params.id)
+        index(req, res)
     } catch (error) {
         res.status(400).json(error)
     }
