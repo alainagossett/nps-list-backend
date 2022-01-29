@@ -10,6 +10,10 @@ const favoriteSchema = new Schema({
     parkDescr: String,
     parkCode: { type: String, required: true },
     notes: String,
+    uId: {
+        type: String,
+        default: '20rsMBNSbDQ4fsY1EiTIKa7hD7V2'
+    }
 }, { timestamps: true });
 
 //Compile mongoose Schema into a model
