@@ -12,7 +12,6 @@ const favoriteSchema = new Schema({
     notes: String,
     uId: {
         type: String,
-        default: '20rsMBNSbDQ4fsY1EiTIKa7hD7V2'
     }
 }, { timestamps: true });
 

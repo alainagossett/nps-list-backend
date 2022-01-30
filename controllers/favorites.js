@@ -31,6 +31,7 @@ favoritesRouter.get('/', (req, res) => {
 
 async function index (req, res) {
     try {
+        console.log(req.user.uid)
         res.json(await Favorite.find({uId: req.user.uid}))
     } catch (error) {
         res.status(400).json(error)
